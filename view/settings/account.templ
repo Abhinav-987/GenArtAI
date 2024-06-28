@@ -1,0 +1,85 @@
+package settings
+
+import (
+    "genartai/models"
+    "genartai/view/layout"
+    "genartai/view/ui"
+    "genartai/view"
+)
+
+templ Index(user models.AuthenticatedUser) {
+    @layout.App(true){
+        <div class="flex items-center justify-center">
+            <div class="max-w-2xl w-full mx-auto mt-4">
+                <div>
+                    <h1 class="text-lg font-semibold border-b border-gray-700 pb-2">Profile</h1>
+                    @ProfileForm(ProfileParams{
+                        Username : user.Account.Username, 
+                    }, ProfileErrors{})
+                </div>
+                <div class="mt-10">
+                    <h1 class="text-lg font-semibold border-b border-gray-700 pb-2">Credits</h1>
+                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 items-center mt-8">
+                        <dt class="">Credits</dt>
+                        <dd class="sm:col-span-1 sm:mt-0">
+                            <span>{ view.String(user.Account.Credits)}</span>
+                        </dd>
+                        <dd class="sm:col-span-1 sm:mt-0">
+                            <a href="/buy-credits" class="btn btn-outline">Buy Credits 🤑🤑</a>
+                        </dd>
+                    </div>   
+                </div>
+                <div class="mt-10">
+                    <h1 class="text-lg font-semibold border-b border-gray-700 pb-2">Reset Password</h1>
+                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 items-center mt-8">
+                        <dt class="">Reset Password</dt>
+                        <dd class="sm:col-span-2 sm:mt-0">
+                            <form
+                                hx-post="/auth/reset-password"
+                                hx-swap="outerHTML"
+                            >
+                                <button class="btn btn-secondary">reset Password</button>
+                            </form>
+                        </dd>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    }
+}
+
+type ProfileErrors struct {
+    Username string
+}
+
+type ProfileParams struct {
+    Username string
+    Success bool
+}
+
+templ ProfileForm(params ProfileParams, errors ProfileErrors) {
+    <form
+        hx-put="/settings/account/profile"
+        hx-swap="outerHTML"
+    >
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 items-center mt-8">
+            <dt class="">Username</dt>
+            <dd class="sm:col-span-2 sm:mt-0">
+                if params.Success {
+                    @ui.Toast("Username Updated Successfully 🥳🥳")
+                }
+                <input class="input input-bordered w-full max-w-sm" value={params.Username} name="username"/>
+                if len(errors.Username) > 0 {
+                    <div class="label">
+                        <span class="label-text-alt text-error">{errors.Username}</span>
+                    </div>
+                }
+            </dd>
+            <dt></dt>
+            <dd class="sm:col-span-2 sm:mt-0">
+                <button class="btn btn-secondary">Save</button>
+            </dd>
+        </div>
+    </form>
+}
+

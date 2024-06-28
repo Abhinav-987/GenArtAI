@@ -1,0 +1,224 @@
+package auth
+
+import "genartai/view/layout"
+import "github.com/nedpals/supabase-go"
+
+templ AccountSetup() {
+    @layout.App(true) {
+        <div class="flex justify-center min-h-full">
+            <div class="max-w-sm w-full bg-base-300 px-8 py-10 rounded-xl shadow-2xl">
+                <h1 class="text-center text-xl font-black mb-10">Setup your account</h1>
+                    @AccountSetupForm(AccountSetupParams{}, AccountSetupErrors{})
+            </div>
+        </div>
+    }
+}
+type AccountSetupErrors struct {
+    Username string
+}
+
+type AccountSetupParams struct {
+    Username string
+}
+
+templ AccountSetupForm(params AccountSetupParams, errors AccountSetupErrors) {
+    <form 
+        hx-post="/account/setup"
+        hx-swap="outerHTML"
+    >
+        <label class="form-control w-full">
+            <div class="label">
+                <span class="label-text">Enter your username</span>
+            </div>
+            <input type="text" name="username" class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary" />
+            <div class="label">
+                if len(errors.Username) > 0 {
+                    <span class="label-text text-error">{ errors.Username }</span>
+                }
+            </div>
+        </label>
+        <button class="btn btn-secondary">submit</button>
+    </form>
+}
+
+
+templ Login() {
+    @layout.App(false) {
+        <div class="flex justify-center mt-[calc(100vh-100vh+8rem)]">
+            <div class="max-w-sm w-full bg-base-300 py-10 px-8 rounded-xl shadow-2xl" >
+                <h1 class="text-center text-xl font-black mb-10">Log in to GenArtAI</h1>
+                @LoginForm(supabase.UserCredentials{}, LoginErrors{})
+            </div>
+        </div>
+    }
+}
+
+templ Signup() {
+    @layout.App(false) {
+        <div class="flex justify-center mt-[calc(100vh-100vh+8rem)]">
+            <div class="max-w-sm w-full bg-base-300 py-10 px-8 rounded-xl shadow-2xl" >
+                <h1 class="text-center text-xl font-black mb-10">Signup to GenArtAI</h1>
+                @SignupForm(SignupParams{}, SignupErrors{})
+            </div>
+        </div>
+    }
+}
+
+type SignupParams struct {
+    Email string
+    Password string
+    ConfirmPassword string
+}
+
+type SignupErrors struct {
+    Email string
+    Password string
+    ConfirmPassword string
+}
+
+templ SignupForm(params SignupParams, errors SignupErrors) {
+    <form 
+        hx-post="/signup"
+        hx-swap="outerHTML"
+        class="space-y-4"
+    >
+        <div class="w-full">
+            <div class="label">
+                <span class="label-text">Email Address</span>
+            </div>
+            <input type="email" value={params.Email} name="email"autocomplete="off" required placeholder="Type here" class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary" />
+            if len(errors.Email) > 0 {
+                <div class="label">
+                    <span class="label-text-alt text-error">{errors.Email}</span>
+                </div>
+            }
+        </div>
+        <div class="w-full">
+            <div class="label">
+                <span class="label-text">Password</span>
+            </div>
+            <input type="password" name="password" autocomplete="off" required class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary" />
+            if len(errors.Password) > 0 {
+                <div class="label">
+                    <span class="label-text-alt text-error">{errors.Password}</span>
+                </div>
+            }
+        </div>
+        <div class="w-full">
+            <div class="label">
+                <span class="label-text">Confirm Password</span>
+            </div>
+            <input type="password" name="confirmpassword" autocomplete="off" required class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary" />
+            if len(errors.Password) > 0 {
+                <div class="label">
+                    <span class="label-text-alt text-error">{errors.ConfirmPassword}</span>
+                </div>
+            }
+        </div>
+        <button type="submit" class="btn btn-secondary w-full">Login <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+}
+
+templ SignupSuccess(email string) {
+    <div>
+        A confirmation email has been sent to: <span class="font-semibold text-success">{email}</span>
+    </div>
+}
+
+type LoginErrors struct {
+    Email string
+    Password string
+    InvalidCredentials string
+}
+
+templ LoginForm(creds supabase.UserCredentials, errors LoginErrors) {
+    <form 
+        hx-post="/login"
+        hx-swap="outerHTML"
+        class="space-y-4 "
+    >
+        <div class="w-full">
+            <div class="label">
+                <span class="label-text">Email Address</span>
+            </div>
+            <input type="email" value={creds.Email} name="email"autocomplete="off" required placeholder="Type here" class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary" />
+            if len(errors.Email) > 0 {
+                <div class="label">
+                    <span class="label-text-alt text-error">{errors.Email}</span>
+                </div>
+            }
+        </div>
+        <div class="w-full">
+            <div class="label">
+                <span class="label-text">Password</span>
+            </div>
+            <input type="password" name="password" autocomplete="off" required placeholder="Type here" class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary" />
+            if len(errors.Password) > 0 {
+                <div class="label">
+                    <span class="label-text-alt text-error">{errors.Password}</span>
+                </div>
+            }
+        </div>
+        if len(errors.InvalidCredentials) > 0 {
+            <div class="text-sm text-error">
+                {errors.InvalidCredentials}
+            </div>
+        }
+        <button type="submit" class="btn btn-secondary w-full">Login <i class="fa-solid fa-arrow-right"></i></button>
+        <div class="divider"> OR </div>
+        <a href="/login/provider/google" type="submit" class="btn btn-outline w-full">Login with Google <i class="fa-brands fa-google"></i></a>
+    </form>
+}
+
+templ ResetPassword() {
+    @layout.App(true) {
+        <div class="flex items-center justify-center">
+            <div class="max-w-2xl w-full mx-auto mt-4">
+                <div>
+                    <h1 class="text-lg font-semibold border-b border-gray-700 pb-2">Reset Password</h1>
+                    <div class="py-10">
+                        <div class="label-text mb-4">Enter New Password</div>
+                        @ResetPasswordForm(ResetPasswordErrors{})
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+type ResetPasswordErrors struct {
+    NewPassword string
+}
+
+type ResetPasswordParams struct {
+    NewPassword string
+}
+
+templ ResetPasswordSuccess(email string) {
+    <div>A password reset link is sent to <span class="text-success font-semibold">{ email }</span></div>
+}   
+
+templ ResetPasswordForm(errors ResetPasswordErrors) {
+    <form
+        hx-put="/auth/reset-password"
+        hx-swap="outerHTML"
+        class="space-y-4 "
+    >
+        <div>
+            <input class="input input-bordered w-full max-w-sm" name="password" type="password"/>
+            if len(errors.NewPassword) > 0 {
+            <div class="label">
+                <span class="label-text-alt text-error">{errors.NewPassword}</span>
+            </div>
+            }    
+        </div>
+        <button class="btn btn-secondary">Update Password</button>
+    </form>
+}
+templ CallbackScript() {
+    <script>
+        var url = window.location.href;
+        var newURL = url.replace("#", "?")
+        window.location = newURL
+    </script>
+}
