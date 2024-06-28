@@ -3,7 +3,7 @@ module github.com/Abhinav-987/GenArtAI
 go 1.22.3
 
 require (
-	github.com/a-h/templ v0.2.707 // indirect
+	github.com/a-h/templ v0.2.731 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/go-chi/chi/v5 v5.0.12 // indirect
 	github.com/golang-migrate/migrate/v4 v4.17.1 // indirect
