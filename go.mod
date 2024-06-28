@@ -2,6 +2,8 @@ module github.com/Abhinav-987/GenArtAI
 
 go 1.22.3
 
+require golang.org/x/crypto v0.24.0
+
 require (
 	github.com/a-h/templ v0.2.731 // indirect
 	github.com/fatih/color v1.16.0 // indirect
@@ -29,5 +31,5 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/sys v0.21.0 // indirect
 )

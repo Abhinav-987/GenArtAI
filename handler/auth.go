@@ -134,14 +134,15 @@ func HandleSignupCreate(w http.ResponseWriter, r *http.Request) error {
 	if errors.Email != "" || errors.Password != "" || errors.ConfirmPassword != "" {
 		return render(r, w, auth.SignupForm(params, errors))
 	}
-	user, err := sb.Client.Auth.SignUp(r.Context(), supabase.UserCredentials{
+
+	_, err := sb.Client.Auth.SignUp(r.Context(), supabase.UserCredentials{
 		Email:    params.Email,
 		Password: params.Password,
 	})
 	if err != nil {
 		return err
 	}
-	return render(r, w, auth.SignupSuccess(user.Email))
+	return hxRedirect(w, r, "/login")
 }
 func HandleLoginWithGoogle(w http.ResponseWriter, r *http.Request) error {
 	res, err := sb.Client.Auth.SignInWithProvider(supabase.ProviderSignInOptions{
