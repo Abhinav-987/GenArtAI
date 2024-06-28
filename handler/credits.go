@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"genartai/view/credits"
 	"net/http"
+
+	"github.com/Abhinav-987/GenArtAI/view/credits"
 )
 
 func HandleCreditsIndex(w http.ResponseWriter, r *http.Request) error {

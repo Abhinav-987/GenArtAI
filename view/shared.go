@@ -2,8 +2,9 @@ package view
 
 import (
 	"context"
-	"genartai/models"
 	"strconv"
+
+	"github.com/Abhinav-987/GenArtAI/models"
 )
 
 func AuthenticatedUser(ctx context.Context) models.AuthenticatedUser {

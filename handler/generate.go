@@ -4,13 +4,14 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"genartai/db"
-	"genartai/models"
-	"genartai/view/generate"
 	"log"
 	"log/slog"
 	"net/http"
 	"strconv"
+
+	"github.com/Abhinav-987/GenArtAI/db"
+	"github.com/Abhinav-987/GenArtAI/models"
+	"github.com/Abhinav-987/GenArtAI/view/generate"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"

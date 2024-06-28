@@ -5,9 +5,10 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"genartai/db"
-	"genartai/models"
 	"net/http"
+
+	"github.com/Abhinav-987/GenArtAI/db"
+	"github.com/Abhinav-987/GenArtAI/models"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"

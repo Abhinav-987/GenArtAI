@@ -1,9 +1,10 @@
 package handler
 
 import (
-	"genartai/models"
 	"log/slog"
 	"net/http"
+
+	"github.com/Abhinav-987/GenArtAI/models"
 
 	"github.com/a-h/templ"
 )

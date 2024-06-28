@@ -2,9 +2,10 @@ package main
 
 import (
 	"database/sql"
-	"genartai/db"
 	"log"
 	"os"
+
+	"github.com/Abhinav-987/GenArtAI/db"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"

@@ -4,12 +4,13 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"genartai/db"
-	"genartai/models"
-	"genartai/pkg/sb"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/Abhinav-987/GenArtAI/db"
+	"github.com/Abhinav-987/GenArtAI/models"
+	"github.com/Abhinav-987/GenArtAI/pkg/sb"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/sessions"

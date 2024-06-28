@@ -1,10 +1,11 @@
 package handler
 
 import (
-	"genartai/db"
-	"genartai/view/settings"
 	"net/http"
 	"strings"
+
+	"github.com/Abhinav-987/GenArtAI/db"
+	"github.com/Abhinav-987/GenArtAI/view/settings"
 )
 
 func HandleSettingIndex(w http.ResponseWriter, r *http.Request) error {

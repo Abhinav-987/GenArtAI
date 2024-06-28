@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"genartai/view/home"
 	"net/http"
+
+	"github.com/Abhinav-987/GenArtAI/view/home"
 )
 
 func HandleHomeIndex(w http.ResponseWriter, r *http.Request) error {

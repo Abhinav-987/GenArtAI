@@ -1,13 +1,14 @@
 package main
 
 import (
-	"genartai/db"
-	"genartai/handler"
-	"genartai/pkg/sb"
 	"log"
 	"log/slog"
 	"net/http"
 	"os"
+
+	"github.com/Abhinav-987/GenArtAI/db"
+	"github.com/Abhinav-987/GenArtAI/handler"
+	"github.com/Abhinav-987/GenArtAI/pkg/sb"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"

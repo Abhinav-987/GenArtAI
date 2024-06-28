@@ -2,7 +2,8 @@ package db
 
 import (
 	"context"
-	"genartai/models"
+
+	"github.com/Abhinav-987/GenArtAI/models"
 
 	"github.com/google/uuid"
 	"github.com/uptrace/bun"
