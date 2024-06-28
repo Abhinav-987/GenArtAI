@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: genartai
+    env: go
+    plan: free
+    buildCommand: go mod tidy && go build -o bin/genartai main.go
+    startCommand: ./bin/genartai
+    envVars:
+      - key: PORT
+        value: "3000"
+      - key: DB_HOST
+        value: "aws-0-ap-south-1.pooler.supabase.com"
+      - key: DB_USER
+        value: "postgres.rzyghlyzrlyrendtzvec"
+      - key: DB_PASSWORD
+        value: "Abhinav@99665"
+      - key: DB_NAME
+        value: "postgres"
+      - key: SUPABASE_SECRET
+        value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ6eWdobHl6cmx5cmVuZHR6dmVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg3ODM0MDAsImV4cCI6MjAzNDM1OTQwMH0.fcoAgiVfMqHVoUbLc_Oi3eb0_968A-oDWdJcQW4Y9W4
+      - key: SUPABASE_URL
+        value: "https://rzyghlyzrlyrendtzvec.supabase.co"
+      - key: SESSION_SECRET
+        value: "8bdUzzp8oSNxgogT06l40KKuy43FkyotU2EsCDHQ10c="
+      - key: APP_DEBUG
+        value: "1"
+      - key: REPLICATE_API_TOKEN
+        value: "r8_VojB5PCb8A4O9VnpCiHxEFylH0w29g02Zte5R"
