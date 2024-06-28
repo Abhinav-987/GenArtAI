@@ -1,5 +1,5 @@
-run: build
-	@./bin/genartai
+# run: build
+# 	@./bin/genartai
 
 install:
 	@go install github.com/a-h/templ/cmd/templ@latest
@@ -11,6 +11,7 @@ install:
 	@npm install -D daisyui@latest
 
 build:
+	@mkdir -p bin
 	tailwindcss -i view/css/app.css -o public/styles.css
 	@templ generate view
 	@go build -o bin/genartai main.go
