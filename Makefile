@@ -13,7 +13,7 @@ install:
 build:
 	tailwindcss -i view/css/app.css -o public/styles.css
 	@templ generate view
-	@go build -o bin/genartai main.go
+	@go build main.go -o /genartai .
 
 up:
 	@go run cmd/migrate/main.go up
