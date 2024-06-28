@@ -1,4 +1,4 @@
-module genartai
+module github.com/Abhinav-987/GenArtAI
 
 go 1.22.3
 
