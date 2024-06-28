@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"log/slog"
 	"net/http"
@@ -81,8 +82,9 @@ func main() {
 	})
 
 	port := os.Getenv("PORT")
+	addr := fmt.Sprintf(":%s", port)
 	slog.Info("application running", "port", port)
-	log.Fatal(http.ListenAndServe(port, router))
+	log.Fatal(http.ListenAndServe(addr, router))
 
 }
 
