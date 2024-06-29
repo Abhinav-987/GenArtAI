@@ -19,6 +19,12 @@ func UpdateImage(tx bun.Tx, image *models.Image) error {
 	return err
 }
 
+func UpdateCreditsByUserID(userID uuid.UUID, credits int) error {
+	account := models.Account{}
+	_, err := Bun.NewUpdate().Model(&account).Set("credits = ?", credits).Where("user_id = ?", userID).Exec(context.Background())
+	return err
+}
+
 func GetImagesByBatchId(batchID uuid.UUID) ([]models.Image, error) {
 	images := []models.Image{}
 	err := Bun.NewSelect().Model(&images).Where("batch_id = ?", batchID).Scan(context.Background())

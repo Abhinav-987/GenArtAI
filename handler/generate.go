@@ -62,6 +62,12 @@ func HandleGenerateCreate(w http.ResponseWriter, r *http.Request) error {
 		errors.Credits = true
 		return render(r, w, generate.Form(params, errors))
 	}
+	user.Account.Credits -= creditsNeeded
+
+	if err := db.UpdateCreditsByUserID(user.UserID, user.Account.Credits); err != nil {
+		return err
+	}
+
 	batchID := uuid.New()
 	genParams := GenerateImageParams{
 		Prompt:  params.Prompt,
