@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"log/slog"
 	"net/http"
 	"strconv"
 
@@ -30,7 +29,7 @@ func HandleGenerateImageStatus(w http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
-	slog.Info("checking image status", "id", id)
+	//slog.Info("checking image status", "id", id)
 	return render(r, w, generate.GalleryImage(image))
 }
 

@@ -9,6 +9,7 @@ import (
 
 	"github.com/Abhinav-987/GenArtAI/db"
 	"github.com/Abhinav-987/GenArtAI/models"
+	"github.com/Abhinav-987/GenArtAI/store"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
@@ -52,8 +53,12 @@ func HandleReplicateCallback(w http.ResponseWriter, r *http.Request) error {
 	}
 	err = db.Bun.RunInTx(r.Context(), &sql.TxOptions{}, func(ctx context.Context, tx bun.Tx) error {
 		for i, imageURL := range resp.Output {
+			filename, err := store.ImageDownloader(imageURL)
+			if err != nil {
+				return fmt.Errorf("failed to download image: %s", err)
+			}
 			images[i].Status = models.ImageStatusCompleted
-			images[i].ImageLocation = imageURL
+			images[i].ImageLocation = filename
 			images[i].Prompt = resp.Input.Prompt
 			if err := db.UpdateImage(tx, &images[i]); err != nil {
 				return err
