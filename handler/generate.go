@@ -127,7 +127,7 @@ func generateImages(ctx context.Context, params GenerateImageParams) error {
 		"num_outputs": params.Amount,
 	}
 	webhook := replicate.Webhook{
-		URL:    fmt.Sprintf("https://webhook.site/5a02082c-dd00-4484-8a96-95e7e17cc767/%s/%s", params.UserID, params.BatchID),
+		URL:    fmt.Sprintf("https://webhook.site/c9a534d5-feec-4628-86ea-c38bc4164ae8/%s/%s", params.UserID, params.BatchID),
 		Events: []replicate.WebhookEventType{"start", "completed"},
 	}
 	_, err = r8.CreatePrediction(ctx, version, input, &webhook, false)

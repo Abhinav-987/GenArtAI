@@ -1,6 +1,7 @@
 package store
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"io"
@@ -23,12 +24,14 @@ func ImageDownloader(url string) (string, error) {
 		return "", fmt.Errorf("failed to read image data: %w", err)
 	}
 	publicID := uuid.New().String()
-	uploadResult, err := cld.Cld.Upload.Upload(context.Background(), imageData, uploader.UploadParams{
+	imageReader := bytes.NewReader(imageData)
+	uploadResult, err := cld.Cld.Upload.Upload(context.Background(), imageReader, uploader.UploadParams{
 		PublicID: publicID,
 		Folder:   "abhinav",
 	})
 	if err != nil {
 		return "", fmt.Errorf("failed to upload image to Cloudinary: %w", err)
 	}
+
 	return uploadResult.SecureURL, nil
 }
