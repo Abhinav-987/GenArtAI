@@ -9,6 +9,7 @@ import (
 
 	"github.com/Abhinav-987/GenArtAI/db"
 	"github.com/Abhinav-987/GenArtAI/handler"
+	cld "github.com/Abhinav-987/GenArtAI/pkg/cloudinary"
 	"github.com/Abhinav-987/GenArtAI/pkg/sb"
 
 	"github.com/go-chi/chi/v5"
@@ -68,7 +69,7 @@ func initEverything() error {
 	if err := db.Init(); err != nil {
 		return err
 	}
-	if err := cloudinary.Init(); err != nil {
+	if err := cld.Init(); err != nil {
 		return err
 	}
 	return sb.Init()
