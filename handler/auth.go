@@ -94,6 +94,7 @@ func HandleAccountSetupCreate(w http.ResponseWriter, r *http.Request) error {
 	account := models.Account{
 		UserID:   user.ID,
 		Username: params.Username,
+		Credits:  50,
 	}
 
 	if err := db.CreateAccount(&account); err != nil {

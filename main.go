@@ -15,37 +15,10 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// func foo() {
-// 	ctx := context.Background()
-// 	r8, err := replicate.NewClient(replicate.WithTokenFromEnv())
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	model := "stability-ai/sdxl"
-// 	version := "7762fd07cf82c948538e41f63f77d685e02b063e37e496e96eefd46c929f9bdc"
-
-// 	input := replicate.PredictionInput{
-// 		"prompt": "An astronaut riding a rainbow unicorn",
-// 	}
-// 	webhook := replicate.Webhook{
-// 		URL:    "https://webhook.site/5a02082c-dd00-4484-8a96-95e7e17cc767",
-// 		Events: []replicate.WebhookEventType{"start", "completed"},
-// 	}
-// 	output, err := r8.Run(ctx, fmt.Sprintf("%s:%s", model, version), input, &webhook)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	fmt.Println("output :", output)
-// 	prediction, _ := r8.CreatePrediction(ctx, version, input, &webhook, false)
-// 	_ = r8.Wait(ctx, prediction)
-// 	fmt.Println("Prediction :", prediction)
-// }
-
 func main() {
 	if err := initEverything(); err != nil {
 		log.Fatal(err)
 	}
-	//foo()
 	router := chi.NewMux()
 	router.Use(handler.WithUser)
 
@@ -93,6 +66,9 @@ func initEverything() error {
 		return err
 	}
 	if err := db.Init(); err != nil {
+		return err
+	}
+	if err := cloudinary.Init(); err != nil {
 		return err
 	}
 	return sb.Init()
