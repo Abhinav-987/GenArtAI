@@ -11,6 +11,8 @@ RUN > /app/.env
 FROM scratch
 COPY --from=builder /genartai /genartai
 COPY --from=builder /app/.env .env
+COPY --from=builder /app/view /view
+COPY --from=builder /app/public /public
 
 EXPOSE 3000
 ENTRYPOINT [ "./genartai" ]

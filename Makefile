@@ -14,7 +14,7 @@ css:
 
 build:
 	@templ generate view
-	@go build -o /genartai main.go
+	@go build -o genartai main.go
 
 up:
 	@go run cmd/migrate/main.go up
