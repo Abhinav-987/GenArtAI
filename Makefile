@@ -3,8 +3,8 @@
 
 install:
 	@go install github.com/a-h/templ/cmd/templ@latest
-	@go get ./...
 	@go mod tidy
+	@go get ./...
 	@go mod download
 	@npm install -D tailwindcss
 	@npm install -D daisyui@latest
