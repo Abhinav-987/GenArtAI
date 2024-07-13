@@ -37,3 +37,13 @@ require (
 	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/sys v0.21.0 // indirect
 )
+
+replace github.com/Abhinav-987/GenArtAI/view/auth => ./view/auth
+
+replace github.com/Abhinav-987/GenArtAI/view/credits => ./view/credits
+
+replace github.com/Abhinav-987/GenArtAI/view/generate => ./view/generate
+
+replace github.com/Abhinav-987/GenArtAI/view/home => ./view/home
+
+replace github.com/Abhinav-987/GenArtAI/view/settings => ./view/settings
